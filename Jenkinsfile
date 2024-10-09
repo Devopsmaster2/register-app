@@ -1,11 +1,10 @@
 pipeline {
     agent { label 'Jenkins-Agent' }
     tools {
-        jdk 'Java17'
+        jdk 'Java21'
         maven 'Maven3'
     }
   stages{
-    
     stage("Cleanup Workspace"){
                 steps {
                 cleanWs()
@@ -17,7 +16,6 @@ pipeline {
                     git branch: 'main', credentialsId: 'github', url: 'https://github.com/Devopsmaster2/register-app'
                 }
         }
-    
 
     stage("Build Application"){
             steps {
@@ -25,13 +23,11 @@ pipeline {
             }
 
        }
-
+      
     stage("Test Application"){
            steps {
                  sh "mvn test"
            }
        }
-
-    
-  }
+    }
 }
